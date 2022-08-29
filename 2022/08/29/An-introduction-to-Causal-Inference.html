@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Causal inference - Generalities | Thomas Laurent</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Causal inference - Generalities" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Understanding and working with statistics" />
+<meta property="og:description" content="Understanding and working with statistics" />
+<link rel="canonical" href="https://tolaurent.github.io/blog/2022/08/29/An-introduction-to-Causal-Inference.html" />
+<meta property="og:url" content="https://tolaurent.github.io/blog/2022/08/29/An-introduction-to-Causal-Inference.html" />
+<meta property="og:site_name" content="Thomas Laurent" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-08-29T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Causal inference - Generalities" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-08-29T00:00:00-05:00","datePublished":"2022-08-29T00:00:00-05:00","description":"Understanding and working with statistics","headline":"Causal inference - Generalities","mainEntityOfPage":{"@type":"WebPage","@id":"https://tolaurent.github.io/blog/2022/08/29/An-introduction-to-Causal-Inference.html"},"url":"https://tolaurent.github.io/blog/2022/08/29/An-introduction-to-Causal-Inference.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://tolaurent.github.io/blog/feed.xml" title="Thomas Laurent" /><link rel="shortcut icon" type="image/x-icon" href="/blog/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">Thomas Laurent</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">About Me</a><a class="page-link" href="/blog/search/">Search</a><a class="page-link" href="/blog/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Causal inference - Generalities</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-08-29T00:00:00-05:00" itemprop="datePublished">
+        Aug 29, 2022
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      6 min read
+    
+</span></p>
+
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-justify-center">
+          <div class="px-2">
+
+    <a href="https://github.com/tolaurent/blog/tree/master/_notebooks/2022-08-29- An introduction to Causal Inference.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/blog/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/tolaurent/blog/master?filepath=_notebooks%2F2022-08-29-+An+introduction+to+Causal+Inference.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/blog/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/tolaurent/blog/blob/master/_notebooks/2022-08-29- An introduction to Causal Inference.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/blog/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+          <div class="px-2">
+  <a href="https://deepnote.com/launch?url=https%3A%2F%2Fgithub.com%2Ftolaurent%2Fblog%2Fblob%2Fmaster%2F_notebooks%2F2022-08-29-+An+introduction+to+Causal+Inference.ipynb" target="_blank">
+      <img class="notebook-badge-image" src="/blog/assets/badges/deepnote.svg" alt="Launch in Deepnote"/>
+  </a>
+</div>
+
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2022-08-29- An introduction to Causal Inference.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Background">Background<a class="anchor-link" href="#Background"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Usefulness-of-causal-inference">Usefulness of causal inference<a class="anchor-link" href="#Usefulness-of-causal-inference"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>There are several contexts where causal inference can help answer particular research questions. For instance, one may be interested in analyzing the effect of an intervention, i.e a <strong>"treatment effect"</strong>. This effect can be measured at different levels, such as among treated group, subgroups or individuals.</p>
+<p>The measurement of a treatment effect relies on evaluating the difference between two potential outcomes: 1) the outcome when the individual is exposed to the treatment and 2) the outcome when the individual is exposed to the control. In observational research, both cannot be observed for each individual. Hence, use of <strong>counterfactuals</strong>, defined as a what would have happened without an intervention for those treated and what would have happened with an intervention for their counterpart.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Causal inference may help to answer different research questions including:</p>
+<ul>
+<li>What is the average treatment of the treatment among the entire population ?</li>
+<li>What is the average treatment of the treatment among the treated / untreated groups ?</li>
+<li>Why was a treatment effective ?</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Importantly, prediction models are not useful when focusing on the decision-making process for instance for health policy. This is because that these models cannot help when reasoning of making a change to a system or taking an action. Prediction models aim at reducing the difference between the actual value and the predicted value and not optimizing the outcome when taking an action such as administrating a treatment.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Causal inference framework is applicable to randomized controlled trial (RCTs) and also real-world data. Real-world data present the advantage of being helpful to address a broader range of research questions and are less expensive in comparison with RCTs.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Causal-inference-fondamentals">Causal inference fondamentals<a class="anchor-link" href="#Causal-inference-fondamentals"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Counterfactual-outcomes">Counterfactual outcomes<a class="anchor-link" href="#Counterfactual-outcomes"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Each individual/patient receives either the treatment or not, meaning that among the two potential outcomes as mentioned above, only one is observed in the data. The other potential outcome that is not observed for this particular individual/patient is refered as the <strong>counterfactual</strong>. It is the outcome in a virtual setting where the individual would have received a different treatment that what has been observed. Assessing causality means comparing the actual outcome with the counterfactual. To be able to do that, there are several assumptions that are required to be met.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Confounder-relating-issues">Confounder relating issues<a class="anchor-link" href="#Confounder-relating-issues"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Suppose that there are differences between the treated and control groups on other characteristics than treatment, it is not possible to conclude that a potential observed difference can be solely attributed to the treatment.  This is known as the <strong>confounding effect</strong>. A variable that can influence the choice of the treatment and the outcome is called a confounder that can cause spurious associations.</p>
+<p>Potential confounders are identified by comparing the characteristics of the treated/control groups. In real-world research, presence of confounders is a serious issue when considering causal modeling and controlling confounding effect by finding potential confounders and handling them analytically. For instance, in many cases, age is a confounder since treatment selection may be oriented by patient age, and age may influence outcome occurrence, e.g death.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Instrumental-variables">Instrumental variables<a class="anchor-link" href="#Instrumental-variables"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Accounting for all potential confounders may not be possible in practice. <strong>Instrumental variables (IV)</strong> can help adressing this situation. In RWD, the treatment is not randomly assigned but the IV is randomized. IV is correlated with the outcome and the treatment but it is assumed that the variable has no direct effect on the outcome. Also, the instrument should be considered to have a causal effect on the treatment variable. Since the instrument is considered to be randomly assigned, it is not correlated with potential confounders. Hence, the effect of the instrument is mediated by the treatment and allowing to measure the causal effect of the treatment on the outcome. An example of potential instrument is the provider preference is associated with the treatment choice.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span> 4apt install graphviz
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>The operation couldn’t be completed. Unable to locate a Java Runtime that supports apt.
+Please visit http://www.java.com for information on installing Java.
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">graphviz</span>
+<span class="k">def</span> <span class="nf">gv</span><span class="p">(</span><span class="n">s</span><span class="p">):</span> <span class="k">return</span> <span class="n">graphviz</span><span class="o">.</span><span class="n">Source</span><span class="p">(</span><span class="s1">&#39;digraph G{ rankdir=&quot;LR&quot;&#39;</span> <span class="o">+</span> <span class="n">s</span> <span class="o">+</span> <span class="s1">&#39;; }&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">gv</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;Confounder-&gt;Treatment</span>
+<span class="s1">Confounder-&gt;Outcome</span>
+<span class="s1">Instrument-&gt;Treatment-&gt;Outcome&#39;&#39;&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_svg output_subarea output_execute_result">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+&lt;!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"&gt;
+<!-- Generated by graphviz version 5.0.1 (20220820.1526)
+ -->
+<!-- Title: G Pages: 1 -->
+<svg width="367pt" height="98pt" viewBox="0.00 0.00 367.27 98.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 94)">
+<title>G</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-94 363.27,-94 363.27,4 -4,4" />
+<!-- Confounder -->
+<g id="node1" class="node">
+<title>Confounder</title>
+<ellipse fill="none" stroke="black" cx="52.65" cy="-18" rx="52.79" ry="18" />
+<text text-anchor="middle" x="52.65" y="-14.3" font-family="Times,serif" font-size="14.00">Confounder</text>
+</g>
+<!-- Treatment -->
+<g id="node2" class="node">
+<title>Treatment</title>
+<ellipse fill="none" stroke="black" cx="188.74" cy="-64" rx="47.39" ry="18" />
+<text text-anchor="middle" x="188.74" y="-60.3" font-family="Times,serif" font-size="14.00">Treatment</text>
+</g>
+<!-- Confounder&#45;&gt;Treatment -->
+<g id="edge1" class="edge">
+<title>Confounder&#45;&gt;Treatment</title>
+<path fill="none" stroke="black" d="M90.64,-30.69C106.84,-36.25 125.99,-42.82 142.99,-48.65" />
+<polygon fill="black" stroke="black" points="142.11,-52.05 152.71,-51.98 144.38,-45.43 142.11,-52.05" />
+</g>
+<!-- Outcome -->
+<g id="node3" class="node">
+<title>Outcome</title>
+<ellipse fill="none" stroke="black" cx="315.73" cy="-41" rx="43.59" ry="18" />
+<text text-anchor="middle" x="315.73" y="-37.3" font-family="Times,serif" font-size="14.00">Outcome</text>
+</g>
+<!-- Confounder&#45;&gt;Outcome -->
+<g id="edge2" class="edge">
+<title>Confounder&#45;&gt;Outcome</title>
+<path fill="none" stroke="black" d="M103.98,-22.43C149.58,-26.45 216.5,-32.35 262.63,-36.41" />
+<polygon fill="black" stroke="black" points="262.46,-39.91 272.73,-37.3 263.07,-32.94 262.46,-39.91" />
+</g>
+<!-- Treatment&#45;&gt;Outcome -->
+<g id="edge4" class="edge">
+<title>Treatment&#45;&gt;Outcome</title>
+<path fill="none" stroke="black" d="M231.7,-56.28C242.56,-54.28 254.35,-52.11 265.55,-50.05" />
+<polygon fill="black" stroke="black" points="266.41,-53.45 275.61,-48.2 265.15,-46.57 266.41,-53.45" />
+</g>
+<!-- Instrument -->
+<g id="node4" class="node">
+<title>Instrument</title>
+<ellipse fill="none" stroke="black" cx="52.65" cy="-72" rx="49.29" ry="18" />
+<text text-anchor="middle" x="52.65" y="-68.3" font-family="Times,serif" font-size="14.00">Instrument</text>
+</g>
+<!-- Instrument&#45;&gt;Treatment -->
+<g id="edge3" class="edge">
+<title>Instrument&#45;&gt;Treatment</title>
+<path fill="none" stroke="black" d="M101.68,-69.13C111.38,-68.56 121.67,-67.94 131.62,-67.35" />
+<polygon fill="black" stroke="black" points="132.06,-70.83 141.83,-66.74 131.64,-63.84 132.06,-70.83" />
+</g>
+</g>
+</svg>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Causal-inference-assumptions">Causal inference assumptions<a class="anchor-link" href="#Causal-inference-assumptions"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>There are four assumptions that are required to estimate causal effects.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="1)-Stable-unit-treatment-value-assumption">1) Stable unit treatment value assumption<a class="anchor-link" href="#1)-Stable-unit-treatment-value-assumption"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Treatment assignement for a patient <strong><em>i</em></strong> should not depend on the assignment of other patients (Non interference). In addition, the treatment should be unique, that is there should not be multiple versions of the treatment</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="2)-Consistency">2) Consistency<a class="anchor-link" href="#2)-Consistency"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If we denote the outcome as $Y$ and $a$ the treatment, if the treatment is set to the treatment $a$ ($T=a$) then the outcome should be that observed when the actual treatment is $a$. This must be valid for all $a$.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="3)-Ignorability">3) Ignorability<a class="anchor-link" href="#3)-Ignorability"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This is also named no unmeasured confounder assumption (NUCA). When conditioning on confounders, the treatment assignment is independent from the outcomes:</p>
+<p>
+$$(Y_0, Y_1) \perp\!\!\!\perp T |X $$
+</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>For instance, BMI may be associated with antidepressant (as T) and individuals with higher BMI are more likely to develop diabetes. Hence, $Y_0$ and $Y_1$ are not independent.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="4)-Positivity">4) Positivity<a class="anchor-link" href="#4)-Positivity"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This assumption consists in considering that all individuals 
+can get either treatment conditional on all levels of covariates X:</p>
+$$P(T=a | X=x)&gt;0$$<p>for all a and x</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Types-of-treatment-effects">Types of treatment effects<a class="anchor-link" href="#Types-of-treatment-effects"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As mentioned above, several effects can be estimated using causal inference framework, and also at different levels.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Average-Treatment-Effect-(ATE)">Average Treatment Effect (ATE)<a class="anchor-link" href="#Average-Treatment-Effect-(ATE)"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Average Treatment Effect (ATE)</strong> is an effect measured at the entire population level and is defined as:</p>
+<p>
+$$ATE=E[Y(T=1)-Y(T=0)]$$
+</p>
+<p>T as the treatment and Y as the binary outcome</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Average-treatment-effect-on-the-treated-(ATT)">Average treatment effect on the treated (ATT)<a class="anchor-link" href="#Average-treatment-effect-on-the-treated-(ATT)"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This effect is measured on the treated group and is defined as:
+
+$$ATT=E[Y(T=1)|T=1] - E[Y(T=0 |T=1)]$$
+</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here, $𝑌(𝑇=1)|𝑇=1$ and $𝑌(𝑇=0)|𝑇=1$ are the potential outcomes in the treated group. This can be of interest to use this estimand when there is an interest in knowing the efficacy of a treatment on those who were actually treated.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Average-treatment-effect-on-the-untreated-(ATU)">Average treatment effect on the untreated (ATU)<a class="anchor-link" href="#Average-treatment-effect-on-the-untreated-(ATU)"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This effect is measured on the untreated group and is defined as:
+
+$$ATT=E[Y(T=1)|T=0] - E[Y(T=0 |T=0)]$$
+</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In that case, $𝑌(𝑇=1)|𝑇=0$ and $𝑌(𝑇=0)|𝑇=0$ are the potential outcomes among the unttreated. This estimand can be suitable when the focus is to determine the effect of a treatment on those who have not been treated yet. This can be of interest when applying a healthcare policy for instance.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Individual-treatment-effect-(ITE)">Individual treatment effect (ITE)<a class="anchor-link" href="#Individual-treatment-effect-(ITE)"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>At the individual effect, the treatment effect is refered as individual treatment effect (ITE):</p>
+<p>
+$$ITE=Y_{i}(T=1)-Y_{i}(T=0)$$
+</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here, $Y_i(T=1)$ and $Y_i(T=0)$ are the potential treated and control outcomes of individual i, respectively.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Implementation-in-R">Implementation in R<a class="anchor-link" href="#Implementation-in-R"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here are some useful packages:</p>
+<ul>
+<li><strong>Dagitty</strong>: a package for structural causal models (<a href="https://cran.r-project.org/web/packages/dagitty/index.html">https://cran.r-project.org/web/packages/dagitty/index.html</a>)</li>
+<li><strong>RISCA</strong>: Causal Inference and Prediction in Cohort-Based Analyses that includes Inverse Probability Weighting and G-computation for marginal estimation of an exposure effect when confounders are expected (<a href="https://cran.r-project.org/web/packages/RISCA/index.html">https://cran.r-project.org/web/packages/RISCA/index.html</a>)</li>
+<li><strong>WeightIt</strong>: Generates balancing weights for causal effect estimation using a broad range of methods (<a href="https://cran.r-project.org/web/packages/WeightIt/index.html">https://cran.r-project.org/web/packages/WeightIt/index.html</a>)</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I described here the general context of causal inference framework, including fundamentals and provided different solutions to start implementing this framework in R.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><a class="u-url" href="/blog/2022/08/29/An-introduction-to-Causal-Inference.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/blog/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Understanding and working with statistics</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/fastai" target="_blank" title="fastai"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/fastdotai" target="_blank" title="fastdotai"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
