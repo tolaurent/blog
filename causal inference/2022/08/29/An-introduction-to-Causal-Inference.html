@@ -8,17 +8,17 @@
 <meta name="generator" content="Jekyll v4.1.1" />
 <meta property="og:title" content="Causal inference - Generalities" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Understanding and working with statistics" />
-<meta property="og:description" content="Understanding and working with statistics" />
-<link rel="canonical" href="https://tolaurent.github.io/blog/2022/08/29/An-introduction-to-Causal-Inference.html" />
-<meta property="og:url" content="https://tolaurent.github.io/blog/2022/08/29/An-introduction-to-Causal-Inference.html" />
+<meta name="description" content="Stat coffee - Understanding and working with statistics" />
+<meta property="og:description" content="Stat coffee - Understanding and working with statistics" />
+<link rel="canonical" href="https://tolaurent.github.io/blog/causal%20inference/2022/08/29/An-introduction-to-Causal-Inference.html" />
+<meta property="og:url" content="https://tolaurent.github.io/blog/causal%20inference/2022/08/29/An-introduction-to-Causal-Inference.html" />
 <meta property="og:site_name" content="Thomas Laurent" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2022-08-29T00:00:00-05:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Causal inference - Generalities" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-08-29T00:00:00-05:00","datePublished":"2022-08-29T00:00:00-05:00","description":"Understanding and working with statistics","headline":"Causal inference - Generalities","mainEntityOfPage":{"@type":"WebPage","@id":"https://tolaurent.github.io/blog/2022/08/29/An-introduction-to-Causal-Inference.html"},"url":"https://tolaurent.github.io/blog/2022/08/29/An-introduction-to-Causal-Inference.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-08-29T00:00:00-05:00","datePublished":"2022-08-29T00:00:00-05:00","description":"Stat coffee - Understanding and working with statistics","headline":"Causal inference - Generalities","mainEntityOfPage":{"@type":"WebPage","@id":"https://tolaurent.github.io/blog/causal%20inference/2022/08/29/An-introduction-to-Causal-Inference.html"},"url":"https://tolaurent.github.io/blog/causal%20inference/2022/08/29/An-introduction-to-Causal-Inference.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://tolaurent.github.io/blog/feed.xml" title="Thomas Laurent" /><link rel="shortcut icon" type="image/x-icon" href="/blog/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
@@ -83,6 +83,13 @@ window.onload = wrap_img;
     
 </span></p>
 
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/blog/categories/#causal inference">causal inference</a>
+        
+      
+      </p>
     
 
     
@@ -217,151 +224,6 @@ window.onload = wrap_img;
 </div>
 </div>
 </div>
-    
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span> 4apt install graphviz
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>The operation couldn’t be completed. Unable to locate a Java Runtime that supports apt.
-Please visit http://www.java.com for information on installing Java.
-
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-    
-
-    
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">graphviz</span>
-<span class="k">def</span> <span class="nf">gv</span><span class="p">(</span><span class="n">s</span><span class="p">):</span> <span class="k">return</span> <span class="n">graphviz</span><span class="o">.</span><span class="n">Source</span><span class="p">(</span><span class="s1">&#39;digraph G{ rankdir=&quot;LR&quot;&#39;</span> <span class="o">+</span> <span class="n">s</span> <span class="o">+</span> <span class="s1">&#39;; }&#39;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    
-
-    
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">gv</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;Confounder-&gt;Treatment</span>
-<span class="s1">Confounder-&gt;Outcome</span>
-<span class="s1">Instrument-&gt;Treatment-&gt;Outcome&#39;&#39;&#39;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_svg output_subarea output_execute_result">
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-&lt;!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
- "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"&gt;
-<!-- Generated by graphviz version 5.0.1 (20220820.1526)
- -->
-<!-- Title: G Pages: 1 -->
-<svg width="367pt" height="98pt" viewBox="0.00 0.00 367.27 98.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 94)">
-<title>G</title>
-<polygon fill="white" stroke="none" points="-4,4 -4,-94 363.27,-94 363.27,4 -4,4" />
-<!-- Confounder -->
-<g id="node1" class="node">
-<title>Confounder</title>
-<ellipse fill="none" stroke="black" cx="52.65" cy="-18" rx="52.79" ry="18" />
-<text text-anchor="middle" x="52.65" y="-14.3" font-family="Times,serif" font-size="14.00">Confounder</text>
-</g>
-<!-- Treatment -->
-<g id="node2" class="node">
-<title>Treatment</title>
-<ellipse fill="none" stroke="black" cx="188.74" cy="-64" rx="47.39" ry="18" />
-<text text-anchor="middle" x="188.74" y="-60.3" font-family="Times,serif" font-size="14.00">Treatment</text>
-</g>
-<!-- Confounder&#45;&gt;Treatment -->
-<g id="edge1" class="edge">
-<title>Confounder&#45;&gt;Treatment</title>
-<path fill="none" stroke="black" d="M90.64,-30.69C106.84,-36.25 125.99,-42.82 142.99,-48.65" />
-<polygon fill="black" stroke="black" points="142.11,-52.05 152.71,-51.98 144.38,-45.43 142.11,-52.05" />
-</g>
-<!-- Outcome -->
-<g id="node3" class="node">
-<title>Outcome</title>
-<ellipse fill="none" stroke="black" cx="315.73" cy="-41" rx="43.59" ry="18" />
-<text text-anchor="middle" x="315.73" y="-37.3" font-family="Times,serif" font-size="14.00">Outcome</text>
-</g>
-<!-- Confounder&#45;&gt;Outcome -->
-<g id="edge2" class="edge">
-<title>Confounder&#45;&gt;Outcome</title>
-<path fill="none" stroke="black" d="M103.98,-22.43C149.58,-26.45 216.5,-32.35 262.63,-36.41" />
-<polygon fill="black" stroke="black" points="262.46,-39.91 272.73,-37.3 263.07,-32.94 262.46,-39.91" />
-</g>
-<!-- Treatment&#45;&gt;Outcome -->
-<g id="edge4" class="edge">
-<title>Treatment&#45;&gt;Outcome</title>
-<path fill="none" stroke="black" d="M231.7,-56.28C242.56,-54.28 254.35,-52.11 265.55,-50.05" />
-<polygon fill="black" stroke="black" points="266.41,-53.45 275.61,-48.2 265.15,-46.57 266.41,-53.45" />
-</g>
-<!-- Instrument -->
-<g id="node4" class="node">
-<title>Instrument</title>
-<ellipse fill="none" stroke="black" cx="52.65" cy="-72" rx="49.29" ry="18" />
-<text text-anchor="middle" x="52.65" y="-68.3" font-family="Times,serif" font-size="14.00">Instrument</text>
-</g>
-<!-- Instrument&#45;&gt;Treatment -->
-<g id="edge3" class="edge">
-<title>Instrument&#45;&gt;Treatment</title>
-<path fill="none" stroke="black" d="M101.68,-69.13C111.38,-68.56 121.67,-67.94 131.62,-67.35" />
-<polygon fill="black" stroke="black" points="132.06,-70.83 141.83,-66.74 131.64,-63.84 132.06,-70.83" />
-</g>
-</g>
-</svg>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    
-
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Causal-inference-assumptions">Causal inference assumptions<a class="anchor-link" href="#Causal-inference-assumptions"> </a></h2>
@@ -573,7 +435,7 @@ $$ITE=Y_{i}(T=1)-Y_{i}(T=0)$$
 
 
 
-  </div><a class="u-url" href="/blog/2022/08/29/An-introduction-to-Causal-Inference.html" hidden></a>
+  </div><a class="u-url" href="/blog/causal%20inference/2022/08/29/An-introduction-to-Causal-Inference.html" hidden></a>
 </article>
 
       </div>
@@ -593,7 +455,7 @@ $$ITE=Y_{i}(T=1)-Y_{i}(T=0)$$
         </p>
       </div>
       <div class="footer-col">
-        <p>Understanding and working with statistics</p>
+        <p>Stat coffee - Understanding and working with statistics</p>
       </div>
     </div>
 
