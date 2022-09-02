@@ -6,7 +6,7 @@ permalink: /about/
 
 # Thomas Laurent, Ph.D
 
-<img src="IMG_0091.jpg" alt="Profile" width="200">
+<img src="IMG_0091.jpg" alt="Profile" width="200" height="300">
 
 ## Expert in biostatistics and data science - Biostatistics training | RWD analysis | Healthcare
 
