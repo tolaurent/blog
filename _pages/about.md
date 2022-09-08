@@ -8,7 +8,9 @@ permalink: /about/
 
 ## Expert in biostatistics and data science - Biostatistics training | RWD analysis | Healthcare
 
-<img align="left" width="100" height="150" src="https://tolaurent.github.io/blog/images/tlau.jpg">
+<img align="left" width="110" height="150" src="https://tolaurent.github.io/blog/images/tlau.jpg">
+
+<br>
 
 [My LinkedIn profile](https://www.linkedin.com/in/thomas-laurent-ab161948/)
 
