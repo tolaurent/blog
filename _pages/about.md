@@ -10,7 +10,7 @@ permalink: /about/
 
 <img align="left" width="110" height="150" src="https://tolaurent.github.io/blog/images/tlau.jpg" style="display:block">
 
-<br/>
+\\
 
 [My LinkedIn profile](https://www.linkedin.com/in/thomas-laurent-ab161948/)
 
