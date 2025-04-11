@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome file</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><p><strong>Table 1. Key Studies on Deep Learning in Econometrics (2020–2025)</strong></p>
+
+<table>
+<thead>
+<tr>
+<th><strong>Study (Author, Year)</strong></th>
+<th><strong>Methodology &amp; Context</strong></th>
+<th><strong>Deep Learning Technique</strong></th>
+<th><strong>Econometric Focus</strong></th>
+<th><strong>Data/Domain</strong></th>
+<th><strong>Key Findings</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Koch et al. (2024)</strong> – <em>A Primer on Deep Learning for Causal Inference</em> (<a href="http://bernardjkoch.com/files/papers/DLforCI.pdf#:~:text=rapid%20adoption%20across%20science%2C%20industry%2C,networks%20are%20nearly%20nonparamet%02ric%20and">A Primer on Deep Learning for Causal Inference</a>) (<a href="http://bernardjkoch.com/files/papers/DLforCI.pdf#:~:text=Nevertheless%2C%20deep%20learning%20remains%20conspicuously,be%20configured%20with%20different%20architectures">A Primer on Deep Learning for Causal Inference</a>)</td>
+<td>Literature review and tutorial on deep nets for causal effect estimation under the potential outcomes framework. Provides taxonomy of methods (deep outcome models, representation learning, GANs) and examples. Critically compares deep learning to other ML for causality.</td>
+<td>N/A (Survey of various: feedforward DNNs, adversarial nets, etc.)</td>
+<td>Causal Inference (heterogeneous treatment effects, policy learning)</td>
+<td>Various – discusses healthcare, text analysis, networks as examples (no new dataset)</td>
+<td>Deep learning is <strong>flexible but underutilized</strong> in social science causal studies. When properly regularized, deep nets can estimate individualized treatment effects with low bias and handle complex data (images, text) (<a href="http://bernardjkoch.com/files/papers/DLforCI.pdf#:~:text=Here%20we%20explore%20the%20potential,or%20even%20encoded%20in%20texts">A Primer on Deep Learning for Causal Inference</a>) (<a href="http://bernardjkoch.com/files/papers/DLforCI.pdf#:~:text=models%20traditionally%20used%20to%20estimate,0">A Primer on Deep Learning for Causal Inference</a>). Highlights need for careful design to ensure balance/ignorability. Identifies a gap in applying these methods to real social science datasets.</td>
+</tr>
+<tr>
+<td><strong>Farrell et al. (2021a)</strong> – <em>Deep Neural Networks for Estimation and Inference</em> (<a href="http://bernardjkoch.com/files/papers/DLforCI.pdf#:~:text=Linguistics%3A%20Human%20Language%20Technologies%2C%20pp,%E2%80%9D%20arXiv">A Primer on Deep Learning for Causal Inference</a>) (<a href="http://bernardjkoch.com/files/papers/DLforCI.pdf#:~:text=Chen%2C%20Huigang%2C%20Totte%20Harinen%2C%20Jeong,14737">A Primer on Deep Learning for Causal Inference</a>)</td>
+<td>Theoretical econometrics paper establishing non-asymptotic bounds for DNN estimators and proposing how to plug them into semiparametric inference (orthogonal moments). Shows DNN can be used for nuisance functions in double ML without sample splitting by leveraging NN properties.</td>
+<td>Feedforward DNN (fully connected, deep ReLU networks); theory of approximation and estimation.</td>
+<td>Causal &amp; Structural (treated as generic semiparametric inference – e.g. treatment effect in partially linear model, or structural target parameter)</td>
+<td>Simulations (no real data). Illustrative examples (e.g. estimating a regression function in high dimensions).</td>
+<td>Proves that DNN-based estimators can achieve <strong>rates close to parametric</strong> under certain conditions despite high dimensionality (<a href="http://bernardjkoch.com/files/papers/DLforCI.pdf#:~:text=Linguistics%3A%20Human%20Language%20Technologies%2C%20pp,%E2%80%9D%20arXiv">A Primer on Deep Learning for Causal Inference</a>) (<a href="http://bernardjkoch.com/files/papers/DLforCI.pdf#:~:text=Farrell%2C%20Max%20H%2C%20Tengyuan%20Liang%2C,%E2%80%9CVisually%20Communicating%20and">A Primer on Deep Learning for Causal Inference</a>). Demonstrates an approach for <strong>automatic debiasing via neural nets</strong> that attains valid confidence intervals. Key insight: neural nets can learn complex nuisance functions, enabling analysts to remove bias in target parameter estimation (ATE, etc.). Validated on simulations; no empirical application given.</td>
+</tr>
+<tr>
+<td><strong>Chernozhukov et al. (2021b)</strong> – <em>Automatic Debiased ML via Neural Nets</em> (<a href="http://bernardjkoch.com/files/papers/DLforCI.pdf#:~:text=Chen%2C%20Huigang%2C%20Totte%20Harinen%2C%20Jeong,14737">A Primer on Deep Learning for Causal Inference</a>) (<a href="http://bernardjkoch.com/files/papers/DLforCI.pdf#:~:text=Chernozhukov%2C%20Victor%2C%20Whitney%20Newey%2C%20Victor,Embeddings%20for%20Causal%20Estimation%20of">A Primer on Deep Learning for Causal Inference</a>)</td>
+<td>Working paper (and later ICML 2022 as “RieszNet”) introducing a method to learn the Riesz representer (influence function) using a DNN (RieszNet) alongside a random forest alternative. Integrates this into a one-step estimator for causal or structural parameters (ATE, etc.), automating orthogonalization.</td>
+<td>Feedforward DNN for Riesz representer; also uses forest. Training by minimizing moment orthogonality loss.</td>
+<td>Causal Inference (ATE, regression coefficient) – general statistical target with moment conditions.</td>
+<td>Simulated data and semi-synthetic data (constructed to evaluate estimation accuracy).</td>
+<td><strong>New algorithm (RieszNet)</strong> that produces debiased estimates of target parameters. It achieved <strong>lower bias and variance</strong> than naive estimators in simulations (<a href="http://bernardjkoch.com/files/papers/DLforCI.pdf#:~:text=Chernozhukov%2C%20Victor%2C%20Whitney%20Newey%2C%20Victor,Embeddings%20for%20Causal%20Estimation%20of">A Primer on Deep Learning for Causal Inference</a>) (<a href="http://bernardjkoch.com/files/papers/DLforCI.pdf#:~:text=Vasilis%20Syrgkanis,08033">A Primer on Deep Learning for Causal Inference</a>). Effective even with high-dimensional covariates, allowing inclusion of many controls without hurting inference. Facilitates automated causal analysis: user need not manually derive adjustments, as the network learns them. Emphasizes theoretical guarantees for valid inference.</td>
+</tr>
+<tr>
+<td><strong>Shi, Blei &amp; Veitch (2019)</strong> – <em>Adapting NNs for Treatment Effect Estimation</em> (<a href="http://bernardjkoch.com/files/papers/DLforCI.pdf#:~:text=Sociological%20Methods%20%26%20Research%2040%3A,%E2%80%9D%20In%20Advances%20in%20Neural">A Primer on Deep Learning for Causal Inference</a>) (<a href="http://bernardjkoch.com/files/papers/DLforCI.pdf#:~:text=Shi%2C%20Claudia%2C%20David%20M,Curran%20Associates%2C%20Inc">A Primer on Deep Learning for Causal Inference</a>)</td>
+<td>Proposed a modified neural network architecture and loss for causal effect estimation. Two-headed NN outputs potential outcomes; introduces a penalty to balance representations between treated/control. First deep learning method specifically targeting individual treatment effect (ITE) estimation performance.</td>
+<td>Multi-task DNN (TARNet) with shared layers and separate outcome heads; additionally, a Integral Probability Metric (IPM) regularization term to enforce balance (CFRNet).</td>
+<td>Causal Inference (ITE / Conditional Average Treatment Effect estimation from observational data).</td>
+<td>Benchmarks: IHDP infant health dataset (semi-synthetic), Jobs training program data, etc.</td>
+<td>With the tailored architecture, the model achieved <strong>smaller ITE prediction error</strong> (PEHE) than both linear models and some non-DL methods (<a href="http://bernardjkoch.com/files/papers/DLforCI.pdf#:~:text=Sociological%20Methods%20%26%20Research%2040%3A,%E2%80%9D%20In%20Advances%20in%20Neural">A Primer on Deep Learning for Causal Inference</a>). Balanced representations significantly improved causal generalization. This showed that <strong>neural nets can estimate heterogeneous effects</strong> if trained with causal-aware objectives. It set the stage for many follow-ups. Limitation: assumes all confounders observed and focuses on binary treatment.</td>
+</tr>
+<tr>
+<td><strong>Bica et al. (2020)</strong> – <em>Deep Causal Inference in Time Series (CRN)</em> (<a href="http://bernardjkoch.com/files/papers/DLforCI.pdf#:~:text=Bica%2C%20Ioana%2C%20Ahmed%20M,Chetverikov%2C%20Mert%20Demirer%2C%20Esther%20Duflo">A Primer on Deep Learning for Causal Inference</a>) (<a href="http://bernardjkoch.com/files/papers/DLforCI.pdf#:~:text=%E2%80%9CEstimating%20Counterfactual%20Treatment%20Outcomes%20Over,%E2%80%9D">A Primer on Deep Learning for Causal Inference</a>)</td>
+<td>Developed an RNN-based framework for longitudinal causal inference. Uses an encoder RNN to learn patient state, a decoder for potential outcomes, and adversarial training to achieve balance at each time step. Essentially merges sequence modeling with counterfactual inference.</td>
+<td>Recurrent Neural Network (RNN) with adversarial loss (a discriminator network) for representation balancing; also uses GAN-style training for counterfactual generation.</td>
+<td>Causal Inference (time-varying treatments; e.g. medical treatments over time, policies with duration)</td>
+<td>Simulated medical trial data; MIMIC-III ICU observational dataset (with time-varying treatment like ventilator use).</td>
+<td>Demonstrated that the CRN model improved factual and counterfactual prediction accuracy over baselines in longitudinal settings. The <strong>adversarially balanced RNN</strong> yielded more stable treatment effect estimates in the ICU data. Key finding: deep learning can handle <strong>temporal confounding</strong> and treatment heterogeneity, extending causal DL to sequential decisions. Highlighted the importance of aligning representations across time to avoid bias.</td>
+</tr>
+<tr>
+<td><strong>Iskhakov et al. (2020)</strong> – <em>ML and Structural Econometrics: Synergies</em> () ()</td>
+<td>Conceptual overview highlighting how machine learning (including DL) can be integrated into structural modeling. Discusses contrasts between ML prediction and structural estimation, and suggests areas (e.g. relaxing rationality, solving games) where ML can help.</td>
+<td>N/A (Perspective piece; mentions various ML techniques – from clustering to deep RL – as tools).</td>
+<td>Structural Modeling (dynamic discrete choice, dynamic games, etc.); also policy counterfactuals.</td>
+<td>No original data – draws on literature examples (e.g. board game AI analogies, dynamic pricing models).</td>
+<td>Concludes that <strong>ML offers powerful function approximation</strong> that can “extend the scope” of structural models, allowing richer heterogeneity and complexity (). For example, deep learning can approximate high-dimensional value functions that standard methods cannot. However, human modeling insight remains crucial (). The paper identifies opportunities: use DL to relax assumptions (like perfect rationality) and to incorporate big data (e.g. images, text) into structural estimation. Overall, it’s optimistic but cautions that ML predictions must be embedded within economic theory for counterfactual analysis.</td>
+</tr>
+<tr>
+<td><strong>Maliar, Maliar &amp; Winant (2021)</strong> – <em>Deep Learning for Solving Dynamic Models</em> (<a href="https://web.stanford.edu/~maliars/Files/JME2021.pdf#:~:text=We%20introduce%20a%20unified%20deep,use%20neural%20networks%20to%20perform">Deep learning for solving dynamic economic models.</a>) (<a href="https://web.stanford.edu/~maliars/Files/JME2021.pdf#:~:text=model%20reduction%20and%20to%20handle,accommodates%20a%20variety%20of%20applications">Deep learning for solving dynamic economic models.</a>)</td>
+<td>Introduces a unified DL approach for solving dynamic economic models (both finite and infinite horizon). Casts Bellman or Euler equations as a nonlinear regression problem and uses stochastic gradient descent to train networks to satisfy model equations. Develops an integration operator for expectation terms and uses NN-based model reduction.</td>
+<td>Feedforward Deep Neural Networks to approximate policy or value functions; custom training loop to minimize equation residuals. Implemented in TensorFlow.</td>
+<td>Structural Modeling (solution of DSGE/dynamic models – e.g. heterogeneous agent macro model with aggregate shock).</td>
+<td>Applied to standard growth model, neoclassical stochastic growth, and the Krusell–Smith (1998) heterogeneous agent model with thousands of agents. Uses simulated data points for training.</td>
+<td>Successfully <strong>solved high-dimensional dynamic models</strong>. For instance, accurately solved a model with ~2000 state variables (via dimension reduction) (<a href="https://web.stanford.edu/~maliars/Files/JME2021.pdf#:~:text=model%20reduction%20and%20to%20handle,accommodates%20a%20variety%20of%20applications">Deep learning for solving dynamic economic models.</a>). The DL method produced policy functions close to benchmark solutions in low-dim cases and made tractable the solution of the large-scale model which was previously unsolved. Key finding: neural nets can overcome the curse of dimensionality in dynamic programming, provided sufficient training data and careful network design. Validated by comparing against known solutions and demonstrating stability in training.</td>
+</tr>
+<tr>
+<td><strong>Maliar &amp; Maliar (2022)</strong> – <em>Deep Learning Classification for Discrete Choice</em> (<a href="https://lmaliar.ws.gc.cuny.edu/files/2022/01/JEDC-Discrete.pdf#:~:text=We%20introduce%20a%20deep%20learning,when%20the%20agent%20switches%20from">Deep learning classification: Modeling discrete labor choice</a>) (<a href="https://lmaliar.ws.gc.cuny.edu/files/2022/01/JEDC-Discrete.pdf#:~:text=one%20employment%20state%20to%20another,with%20thousands%20of%20state%20variables">Deep learning classification: Modeling discrete labor choice</a>)</td>
+<td>Extends the DL solution method to models with discrete choices (e.g. labor participation). Proposes treating discrete decision as a classification problem with a neural network predicting the probability of each discrete action. Combines this with continuous decisions solved via projection methods.</td>
+<td>Feedforward DNN with softmax output for discrete choice (classification); integration of classification output into simulation of model; uses TensorFlow for training.</td>
+<td>Structural Modeling (dynamic models with discrete-continuous choices, e.g. indivisible labor in macro model).</td>
+<td>Demonstrated on a heterogeneous-agent growth model with <strong>indivisible labor</strong> (work/no-work choice) – based on Krusell–Smith economy with unemployment choice.</td>
+<td>Showed the <strong>DLC method can find policy rules for discrete decisions</strong>, accurately identifying the threshold at which an agent switches employment states (<a href="https://lmaliar.ws.gc.cuny.edu/files/2022/01/JEDC-Discrete.pdf#:~:text=discrete,to%20perform%20model%20reduction%20and">Deep learning classification: Modeling discrete labor choice</a>). The network effectively learned the discontinuous policy function (work or not) and matched known results. Achieved computational tractability for models with <strong>large state spaces and discrete choices</strong>, which are challenging for traditional solvers. This indicates deep nets can handle non-smooth policy functions by learning probability mappings.</td>
+</tr>
+<tr>
+<td><strong>Fernández-Villaverde et al. (2024)</strong> – <em>Taming the Curse of Dimensionality</em> (<a href="https://ideas.repec.org/p/pen/papers/24-034.html#:~:text=We%20argue%20that%20deep%20learning,in%20quantitative%20economics%20and%20offer">Taming the Curse of Dimensionality:Quantitative Economics with Deep Learning</a>) (<a href="https://ideas.repec.org/p/pen/papers/24-034.html#:~:text=challenges%20posed%20by%20solving%20dynamic,offer%20reasons%20for%20cautious%20optimism">Taming the Curse of Dimensionality:Quantitative Economics with Deep Learning</a>)</td>
+<td>Extensive survey and tutorial with examples. Solves a stochastic neoclassical growth model using a deep learning method and compares to standard solutions. Surveys other applications (deep learning for asset pricing, for high-dim heterogeneous agents, etc.). Focuses on how DL can alleviate curse of dimensionality in solving models.</td>
+<td>Feedforward DNN for policy functions (in demo); discusses use of CNNs for PDEs and other architectures in various contexts. Overall advocates using modern DL libraries in econ computations.</td>
+<td>Structural Modeling (quantitative macroeconomics, computational economics).</td>
+<td>Example: Neoclassical growth model solution (simulated data for training the network). Survey covers multiple domains (no single dataset).</td>
+<td>Reports that deep learning solutions can <strong>match accuracy of conventional methods</strong> in low dimensions and remain feasible in much higher dimensions where conventional methods break down (<a href="https://ideas.repec.org/p/pen/papers/24-034.html#:~:text=We%20argue%20that%20deep%20learning,in%20quantitative%20economics%20and%20offer">Taming the Curse of Dimensionality:Quantitative Economics with Deep Learning</a>). For the growth model, the DNN solution achieved accurate value functions and policy rules, and scaled well as state dimensionality increased. The paper’s survey of applications found consistent success in using DL for tasks like solving high-dimensional HJB equations and estimating complex models. Concludes with cautious optimism: DL is a <strong>powerful tool for quantitative economics</strong>, but practitioners must carefully validate results and be aware of training stability issues (not a black-box push-button).</td>
+</tr>
+<tr>
+<td><strong>Azinović et al. (2022)</strong> – <em>Deep Equilibrium Nets (DEQN)</em> (<a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/iere.12575#:~:text=Library%20onlinelibrary,functional%20rational%20expectations%20equilibria">DEEP EQUILIBRIUM NETS - Azinovic - 2022 - Wiley Online Library</a>)</td>
+<td>Proposes a deep learning method to compute rational expectations equilibria in heterogeneous agent models with aggregate shocks. The network approximates the policy functions and the aggregate law of motion (distribution) simultaneously, seeking a fixed point. Training involves simulations of the economic model and iterating until convergence.</td>
+<td>Feedforward neural networks representing policy functions and value functions; potentially autoencoder-like structure for distribution; training via iterative equilibrium adjustment (combining machine learning with economic fixed-point iteration).</td>
+<td>Structural Modeling (macroeconomic heterogeneous agent models – high-dimensional distribution of wealth/income among agents).</td>
+<td>Applied to a standard heterogeneous agent model (Aiyagari-type model with aggregate shocks) and others to test performance. Uses simulated data from the model itself.</td>
+<td>DEQN was able to <strong>solve for equilibrium policy functions and price functions in a high-dimension state space</strong> that is intractable with traditional methods. Achieved accurate approximations to the true equilibrium (validated by checking Euler equation errors) and significantly reduced computation time. Essentially, the deep network learned the mapping from state distributions to equilibrium outcomes. This showcased that deep nets can even handle solving for distributions in macro models, not just individual decisions, pushing the frontier of what models can be solved.</td>
+</tr>
+<tr>
+<td><strong>Safonov (2024)</strong> – <em>NN Approach to Demand Estimation (Retail Pricing)</em> (<a href="https://arxiv.org/html/2412.00920v1#:~:text=methods%20often%20struggle%20with%20limited,incorporates%20a%20wide%20range%20of">Neural Network Approach to Demand Estimation and Dynamic Pricing in Retail</a>) (<a href="https://arxiv.org/html/2412.00920v1#:~:text=machine%20learning%20model%20outperforms%20econometric,of%20other%20products%20and%20competitors">Neural Network Approach to Demand Estimation and Dynamic Pricing in Retail</a>)</td>
+<td>Empirical study comparing a deep neural network vs. a traditional econometric model for demand estimation under low price variation. The NN is trained to predict product sales given product features and prices (own and competitors), capturing complex nonlinear effects.</td>
+<td>Feedforward Neural Network (multi-layer perceptron) with nonlinear activation; trained on historical pricing data.</td>
+<td>Structural-esque Demand Estimation (consumer demand curve) and Dynamic Pricing (policy simulation) – blends predictive modeling with causal interpretation of price elasticity.</td>
+<td>Simulation experiments + real e-commerce dataset (many products with limited price variation).</td>
+<td>The DNN model outperformed a parametric model in forecasting demand, especially when price variation is limited. In simulation, it cut MSE of price coefficient by ~3x under low variation (<a href="https://arxiv.org/html/2412.00920v1#:~:text=methods%20often%20struggle%20with%20limited,incorporates%20a%20wide%20range%20of">Neural Network Approach to Demand Estimation and Dynamic Pricing in Retail</a>). On real data, the NN’s estimated demand elasticities were <strong>more plausible (negative for all products)</strong>, whereas the traditional model sometimes gave wrong signs (<a href="https://arxiv.org/html/2412.00920v1#:~:text=machine%20learning%20model%20outperforms%20econometric,of%20other%20products%20and%20competitors">Neural Network Approach to Demand Estimation and Dynamic Pricing in Retail</a>). Suggests deep learning can <strong>reliably recover demand relationships</strong> and inform pricing decisions even when data are noisy or insufficient for classic instruments. Bias assessment indicates the NN better controlled for subtle feature interactions that confounded the simpler model.</td>
+</tr>
+<tr>
+<td><strong>Farrell et al. (2023)</strong> – <em>Estimating Structural Models Using Neural Networks (NNE)</em> ([Estimating Parameters of Structural Models Using Neural Networks</td>
+<td>Marketing Science](<a href="https://pubsonline.informs.org/doi/10.1287/mksc.2022.0360#:~:text=Proposition%201%20%20lets%20,from%20a%20less%20technical%20perspective">https://pubsonline.informs.org/doi/10.1287/mksc.2022.0360#:~:text=Proposition 1  lets ,from a less technical perspective</a>)) ([Estimating Parameters of Structural Models Using Neural Networks</td>
+<td>Marketing Science](<a href="https://pubsonline.informs.org/doi/10.1287/mksc.2022.0360#:~:text=application%20where%20n%20is%20fixed%2C,from%20a%20less%20technical%20perspective">https://pubsonline.informs.org/doi/10.1287/mksc.2022.0360#:~:text=application where n is fixed%2C,from a less technical perspective</a>))</td>
+<td>Introduces Neural Net Estimator for structural parameters. The approach simulates many datasets from the structural model across various parameter values, trains a shallow NN to map summary statistics (moments) to parameters, then applies this trained NN to actual data’s moments to estimate parameters. It’s effectively a learned surrogator for the SMM/GMM mapping.</td>
+<td>Shallow to modest-depth Neural Network (to avoid overfitting simulation noise) trained on simulation draws; the architecture is chosen to balance bias and variance (regularization applied).</td>
+<td>Structural Parameter Estimation (Simulated Method of Moments, Indirect Inference applications) – e.g. estimating preference parameters, technology parameters in models.</td>
+</tr>
+</tbody>
+</table><p><em>Sources: The information in this table is drawn from the referenced papers and their abstracts or main results sections. Citations in brackets (e.g., (<a href="https://web.stanford.edu/~maliars/Files/JME2021.pdf#:~:text=We%20introduce%20a%20unified%20deep,use%20neural%20networks%20to%20perform">Deep learning for solving dynamic economic models.</a>)) refer to specific lines in the source documents that support the summary given.</em></p>
+</div>
+</body>
+
+</html>
